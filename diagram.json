@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "author": "Group 15 - Amr, Amro, and Huthayfa",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -64.2,
+      "left": 210.3,
+      "rotate": 90,
+      "attrs": { "temperature": "25", "humidity": "50" }
+    },
+    {
+      "type": "wokwi-pir-motion-sensor",
+      "id": "pir1",
+      "top": 88.12,
+      "left": -220.3,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "door_switch",
+      "top": 282.8,
+      "left": -6.5,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -169.8, "left": 118.8, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer1",
+      "top": 26.1,
+      "left": 177.3,
+      "rotate": 90,
+      "attrs": { "volume": "0.8" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "arm_button",
+      "top": 188.6,
+      "left": -134.4,
+      "rotate": 90,
+      "attrs": { "color": "red", "label": "ARM/DISARM" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "status_led",
+      "top": 54,
+      "left": 330.2,
+      "attrs": { "color": "green", "label": "ARMED" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 129.05,
+      "left": 267.4,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "fan_indicator",
+      "top": -186,
+      "left": 330.2,
+      "attrs": { "color": "blue", "label": "FAN" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -82.15,
+      "left": 286.6,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "h-96", "v177.7" ] ],
+    [ "dht1:GND", "esp:GND.1", "black", [ "h-57.6", "v139.4" ] ],
+    [ "dht1:SDA", "esp:D15", "green", [ "h-124.8", "v149.2" ] ],
+    [ "pir1:VCC", "esp:VIN", "red", [ "h0" ] ],
+    [ "pir1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "pir1:OUT", "esp:D13", "purple", [ "h0" ] ],
+    [ "door_switch:1", "esp:D12", "orange", [ "h0.2", "v-153.4" ] ],
+    [ "door_switch:2", "esp:GND.2", "black", [ "h-19.1", "v-134.8" ] ],
+    [ "relay1:VCC", "esp:VIN", "red", [ "h-90", "v309.3" ] ],
+    [ "relay1:GND", "esp:GND.1", "black", [ "h-42", "v289.8" ] ],
+    [ "relay1:IN", "esp:D26", "blue", [ "h-128.4", "v232.4" ] ],
+    [ "buzzer1:1", "esp:D4", "yellow", [ "h0" ] ],
+    [ "buzzer1:2", "esp:GND.1", "black", [ "h-57.6", "v81.4" ] ],
+    [ "arm_button:1.l", "esp:D27", "red", [ "h-3", "v-74.8" ] ],
+    [ "arm_button:1.r", "esp:GND.2", "black", [ "h45", "v-103.6" ] ],
+    [ "status_led:A", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "esp:D2", "green", [ "v0" ] ],
+    [ "status_led:C", "esp:GND.1", "black", [ "v0" ] ],
+    [ "fan_indicator:A", "r2:1", "blue", [ "h19.2", "v67.2" ] ],
+    [ "r2:2", "relay1:NO", "blue", [ "v0" ] ],
+    [ "fan_indicator:C", "relay1:COM", "black", [ "h-18.8", "v0", "h-93.6" ] ],
+    [ "relay1:COM", "esp:3V3", "red", [ "h-165.6", "v298.3" ] ]
+  ],
+  "dependencies": {}
+}
